@@ -1,9 +1,16 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const NavBar = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(result => toast.success('LogOut Successful'))
+            .then(error => toast.error(error.message))
+    }
 
     const menuItems = <>
         <li><Link to='/'>Home</Link></li>
@@ -13,7 +20,7 @@ const NavBar = () => {
             user?.uid ?
                 <>
                     <li><Link to='/dashboard'>Dashboard</Link></li>
-                    <li className='ml-2'><button className='btn btn-outline rounded-xl normal-case'>Sign Out</button></li>
+                    <li className='ml-2'><button onClick={handleLogOut} className='btn btn-outline rounded-xl normal-case'>Sign Out</button></li>
                 </>
                 :
                 <li><Link to='/login'>Login</Link></li>
