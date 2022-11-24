@@ -1,28 +1,37 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import user1 from '../../Assets/user1.png'
 import photo from '../../Assets/photo.png'
 import { AuthContext } from '../../Context/AuthProvider';
 import { toast } from 'react-toastify';
 import { GoogleAuthProvider } from 'firebase/auth';
+import { setAuthToken } from '../../Api/auth';
 
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { createUser, updateUser, googleSignIn, loading, setLoading } = useContext(AuthContext);
-
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || '/';
 
     const googleProvider = new GoogleAuthProvider();
     const handleLoginWithGoogle = () => {
         googleSignIn(googleProvider)
             .then(result => {
                 toast.success("Login Successful With Google");
+                setAuthToken(result.user)
+                setLoading(false);
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                toast.error(error.message);
                 setLoading(false);
             })
-            .catch(error => toast.error(error.message))
     }
 
     const handleSignup = data => {
+        setLoading(true);
         const image = data.photo[0]
         const formData = new FormData();
         formData.append('image', image);
@@ -35,17 +44,28 @@ const SignUp = () => {
                 if (imageData.success) {
                     createUser(data.email, data.password)
                         .then(result => {
+                            setAuthToken(result.user);
                             updateUser(data.name, imageData.data.display_url)
                                 .then(result => {
                                     toast.success('Successfully Created Your Account');
                                     setLoading(false);
+                                    navigate(from, { replace: true })
                                 })
-                                .catch(error => toast.error(error.message))
+                                .catch(error => {
+                                    toast.error(error.message)
+                                    setLoading(false);
+                                })
                         })
-                        .catch(error => toast.error(error.message))
+                        .catch(error => {
+                            toast.error(error.message)
+                            setLoading(false);
+                        })
                 }
             })
-            .catch(error => toast.error(error.message))
+            .catch(error => {
+                toast.error(error.message)
+                setLoading(false);
+            })
     }
 
     return (
