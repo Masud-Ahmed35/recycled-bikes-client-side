@@ -1,31 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import user1 from '../../Assets/user1.png'
 
-const Login = () => {
+const SignUp = () => {
     return (
         <section>
             <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
                 <form className="w-full max-w-md">
-                    <h1 className="text-3xl text-center font-extrabold italic text-gray-800">Login</h1>
-                    <div className="relative flex items-center mt-8">
+                    <h1 className="text-3xl text-center font-extrabold italic text-gray-800 mb-11">SignUp</h1>
+
+                    <label htmlFor="">Your Name</label>
+                    <div className="relative flex items-center mt-2 mb-5">
+                        <span className="absolute">
+                            <img className='w-6 h-6 ml-2' src={user1} alt="" />
+                        </span>
+                        <input type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Name" />
+                    </div>
+                    <label htmlFor="">Email</label>
+                    <div className="relative flex items-center mt-2 mb-5">
                         <span className="absolute">
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-3 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
                         </span>
-                        <input type="email" className="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Email address" />
+                        <input type="email" className="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="example@email.com" />
                     </div>
-                    <div className="relative flex items-center mt-4">
+                    <label className='' htmlFor="">Password</label>
+                    <div className="relative flex items-center mt-2">
                         <span className="absolute">
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-3 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                             </svg>
                         </span>
-                        <input type="password" className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Password" />
+                        <input type="password" className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="********" />
                     </div>
-                    <div className="mt-6">
+                    <div className="mt-7">
                         <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white uppercase transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                            LogIn
+                            SignUp
                         </button>
                         <div className="flex items-center justify-between mt-4">
                             <span className="w-1/5 border-b md:w-1/4"></span>
@@ -43,7 +54,7 @@ const Login = () => {
                         </Link>
                         <div className="mt-6 text-center ">
                             <Link to='/signup' className="text-sm text-blue-500 hover:underline">
-                                Don't have an account yet? Sign up
+                                Already have an account? Sign In
                             </Link>
                         </div>
                     </div>
@@ -53,4 +64,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default SignUp;
