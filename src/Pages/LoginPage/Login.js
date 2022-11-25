@@ -27,7 +27,6 @@ const Login = () => {
                 setAuthToken(googleUser);
                 if (result.acknowledged) {
                     toast.success("Login Successful With Google");
-                    setAuthToken(result.user)
                     setLoading(false);
                     navigate(from, { replace: true })
                 }
@@ -42,7 +41,7 @@ const Login = () => {
         signIn(data.email, data.password)
             .then(result => {
                 toast.success('Login Successful');
-                setAuthToken(result.user)
+                setAuthToken({ email: result.user.email })
                 setLoading(false);
                 navigate(from, { replace: true })
             })
