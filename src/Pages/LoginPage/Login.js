@@ -18,10 +18,19 @@ const Login = () => {
     const handleLoginWithGoogle = () => {
         googleSignIn(googleProvider)
             .then(result => {
-                toast.success("Login Successful With Google");
-                setAuthToken(result.user)
-                setLoading(false);
-                navigate(from, { replace: true })
+                const googleUser = {
+                    name: result?.user?.displayName,
+                    email: result?.user?.email,
+                    image: result?.user?.photoURL,
+                    role: 'buyer'
+                }
+                setAuthToken(googleUser);
+                if (result.acknowledged) {
+                    toast.success("Login Successful With Google");
+                    setAuthToken(result.user)
+                    setLoading(false);
+                    navigate(from, { replace: true })
+                }
             })
             .catch(error => {
                 toast.error(error.message);

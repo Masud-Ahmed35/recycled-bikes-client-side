@@ -48,10 +48,6 @@ const router = createBrowserRouter([
         element: <DashboardLayout />,
         children: [
             {
-                path: '/dashboard',
-                element: <Dashboard />
-            },
-            {
                 path: '/dashboard/add-category',
                 element: <AddCategory />
             },

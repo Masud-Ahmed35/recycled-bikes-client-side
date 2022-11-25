@@ -4,7 +4,6 @@ import { AuthContext } from '../../Context/AuthProvider';
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
 
-
     return (
         <div>
             <div className="flex flex-col w-64 py-8 bg-white border-r dark:bg-gray-900 dark:border-gray-700">

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import user1 from '../../Assets/user1.png'
@@ -9,6 +9,7 @@ import { GoogleAuthProvider } from 'firebase/auth';
 import { setAuthToken } from '../../Api/auth';
 
 const SignUp = () => {
+    const [role, setRole] = useState('buyer');
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { createUser, updateUser, googleSignIn, loading, setLoading } = useContext(AuthContext);
     const location = useLocation();
@@ -19,10 +20,18 @@ const SignUp = () => {
     const handleLoginWithGoogle = () => {
         googleSignIn(googleProvider)
             .then(result => {
-                toast.success("Login Successful With Google");
-                setAuthToken(result.user)
-                setLoading(false);
-                navigate(from, { replace: true })
+                const googleUser = {
+                    name: result?.user?.displayName,
+                    email: result?.user?.email,
+                    image: result?.user?.photoURL,
+                    role: 'buyer'
+                }
+                setAuthToken(googleUser);
+                if (result.acknowledged) {
+                    toast.success("Login Successful With Google");
+                    setLoading(false);
+                    navigate(from, { replace: true })
+                }
             })
             .catch(error => {
                 toast.error(error.message);
@@ -44,10 +53,15 @@ const SignUp = () => {
                 if (imageData.success) {
                     createUser(data.email, data.password)
                         .then(result => {
-                            setAuthToken(result.user);
+                            setAuthToken({
+                                name: data?.name,
+                                email: data?.email,
+                                image: imageData?.data?.display_url,
+                                role: role
+                            });
                             updateUser(data.name, imageData.data.display_url)
                                 .then(result => {
-                                    toast.success('Successfully Created Your Account');
+                                    toast.success(`Successfully Created Your ${role} Account`);
                                     setLoading(false);
                                     navigate(from, { replace: true })
                                 })
@@ -136,6 +150,22 @@ const SignUp = () => {
                         />
                     </div>
                     <div className="text-right text-sm mt-1">{errors?.password && <p role='alert' className='text-red-600'>{errors?.password?.message}</p>}</div>
+
+                    <div className='flex justify-evenly mt-6'>
+                        <div className='flex gap-3 items-center'>
+                            <input type="checkbox" value='buyer'
+                                onClick={(e) => setRole(e.target.value)}
+                                className="checkbox checkbox-success" />
+                            <label className='font-bold italic'>As a Buyer</label>
+                        </div>
+                        <div className='flex gap-3 items-center'>
+                            <input type="checkbox" value='seller'
+                                onClick={(e) => setRole(e.target.value)}
+                                className="checkbox checkbox-info" />
+                            <label className='font-bold italic'>As a Seller</label>
+                        </div>
+                    </div>
+
                     <div className="mt-7">
                         <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white uppercase transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                             {
