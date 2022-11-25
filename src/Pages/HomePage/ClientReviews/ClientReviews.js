@@ -6,7 +6,7 @@ const ClientReviews = () => {
             <div className="container px-6 py-10 mx-auto">
                 <div className="mt-6 md:flex md:items-center md:justify-between">
                     <div>
-                        <h1 className="text-3xl font-semibold text-gray-800 capitalize xl:text-5xl lg:text-4xl dark:text-white">
+                        <h1 className="text-3xl font-semibold text-gray-800">
                             What our clients are saying
                         </h1>
 
