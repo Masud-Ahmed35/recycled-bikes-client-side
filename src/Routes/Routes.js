@@ -4,6 +4,7 @@ import Main from "../Layouts/Main";
 import Blog from "../Pages/BlogPage/Blog";
 import AddCategory from "../Pages/Dashboard/Admin/AddCategory";
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import AddProduct from "../Pages/Dashboard/Seller/AddProduct";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/HomePage/Home";
 import Login from "../Pages/LoginPage/Login";
@@ -53,7 +54,11 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/add-category',
                 element: <AddCategory />
-            }
+            },
+            {
+                path: '/dashboard/add-product',
+                element: <AddProduct />
+            },
         ]
     }
 ])

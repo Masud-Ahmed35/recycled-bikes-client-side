@@ -1,12 +1,16 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import Dashboard from '../Pages/Dashboard/Dashboard';
 import NavBar from '../Pages/Shared/NavBar/NavBar';
 
 const DashboardLayout = () => {
     return (
         <div>
             <NavBar />
-            <Outlet />
+            <div className='flex'>
+                <Dashboard />
+                <Outlet />
+            </div>
         </div>
     );
 };
