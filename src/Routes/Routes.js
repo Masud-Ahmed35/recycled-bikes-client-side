@@ -1,6 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
+import DashboardLayout from "../Layouts/DashboardLayout";
 import Main from "../Layouts/Main";
 import Blog from "../Pages/BlogPage/Blog";
+import AddCategory from "../Pages/Dashboard/Admin/AddCategory";
+import Dashboard from "../Pages/Dashboard/Dashboard";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/HomePage/Home";
 import Login from "../Pages/LoginPage/Login";
@@ -37,6 +40,20 @@ const router = createBrowserRouter([
                 path: '/blog',
                 element: <Blog />
             },
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <DashboardLayout />,
+        children: [
+            {
+                path: '/dashboard',
+                element: <Dashboard />
+            },
+            {
+                path: '/dashboard/add-category',
+                element: <AddCategory />
+            }
         ]
     }
 ])

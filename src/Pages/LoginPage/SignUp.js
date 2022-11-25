@@ -98,7 +98,7 @@ const SignUp = () => {
                             {...register("photo", {
                                 required: 'Please Provide Your photo'
                             })}
-                            aria-invalid={errors?.name ? 'true' : 'false'}
+                            aria-invalid={errors?.photo ? 'true' : 'false'}
                         />
                     </div>
                     <div className="mb-4 text-right text-sm">{errors?.photo && <p className='text-red-600'>{errors?.photo?.message}</p>}</div>
