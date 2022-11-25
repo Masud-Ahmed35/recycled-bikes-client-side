@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { getField } from '../../../Api/utilities';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const AddProduct = () => {
     const { user, loading, setLoading } = useContext(AuthContext);
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const date = new Date();
 
     const { data: categories = [] } = useQuery({
         queryKey: ['categories'],
@@ -16,10 +17,61 @@ const AddProduct = () => {
             return data;
         }
     })
-    // const categoryName = getField(categories, 'categoryName');
 
     const handleAddProduct = data => {
-        console.log(data);
+        setLoading(true);
+        const image = data.productImage[0]
+        const formData = new FormData();
+        formData.append('image', image);
+        fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imgbb_apiKey}`, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imageData => {
+                const product = {
+                    productName: data?.productName,
+                    productImage: imageData?.data?.display_url,
+                    categoryId: data?.categoryId,
+                    condition: data?.condition,
+                    color: data?.color,
+                    description: data?.description,
+                    location: data?.location,
+                    originalPrice: data?.originalPrice,
+                    purchaseYear: data?.purchaseYear,
+                    resalePrice: data?.resalePrice,
+                    sellerName: user?.displayName,
+                    sellerEmail: user?.email,
+                    sellerPhone: data?.sellerPhone,
+                    yearsOfUse: data?.yearsOfUse,
+                    availability: 'Available',
+                    sellerVerification: 'Verified',
+                    postTime: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`
+
+                }
+                fetch(`${process.env.REACT_APP_API_URL}/products`, {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json',
+                        authorization: `bearer ${localStorage.getItem('accessToken')}`
+                    },
+                    body: JSON.stringify(product)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        toast.success('Product Added Successfully');
+                        console.log(data);
+                        setLoading(false);
+                    })
+                    .catch(error => {
+                        setLoading(false);
+                        console.log(error)
+                    })
+            })
+            .catch(error => {
+                setLoading(false);
+                console.log(error)
+            })
     }
 
     return (
@@ -140,19 +192,19 @@ const AddProduct = () => {
                         </div>
                         <div>
                             <div>
-                                <input placeholder='Seller Name'
+                                <input placeholder='Color'
                                     type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
-                                    {...register("sellerName", {
+                                    {...register("color", {
                                         required: 'required'
                                     })}
-                                    aria-invalid={errors?.sellerName ? 'true' : 'false'}
+                                    aria-invalid={errors?.color ? 'true' : 'false'}
                                 />
                             </div>
-                            <div className="mt-1 text-right">{errors?.sellerName && <p className='text-red-600 text-sm'>{errors?.sellerName?.message}</p>}</div>
+                            <div className="mt-1 text-right">{errors?.color && <p className='text-red-600 text-sm'>{errors?.color?.message}</p>}</div>
                         </div>
                         <div>
                             <div>
-                                <input placeholder='Seller Phone'
+                                <input placeholder='Seller Contact Number'
                                     type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                     {...register("sellerPhone", {
                                         required: 'required'
@@ -173,7 +225,11 @@ const AddProduct = () => {
                         <div className="mt-1 text-right">{errors?.description && <p className='text-red-600 text-sm'>{errors?.description?.message}</p>}</div>
                     </div>
                     <div className="flex justify-end mt-6">
-                        <button className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
+                        <button className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
+                            {
+                                loading ? 'Loading...' : 'Add Product'
+                            }
+                        </button>
                     </div>
                 </form>
             </section>
