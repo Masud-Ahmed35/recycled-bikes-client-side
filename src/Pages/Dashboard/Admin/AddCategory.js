@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const AddCategory = () => {
-    const { loading, setLoading } = useContext(AuthContext);
+    const { user, loading, setLoading } = useContext(AuthContext);
     const { register, formState: { errors }, handleSubmit } = useForm();
 
 
@@ -18,9 +18,32 @@ const AddCategory = () => {
         })
             .then(res => res.json())
             .then(imageData => {
-                console.log(imageData.data.display_url);
+                const category = {
+                    categoryName: data.name,
+                    categoryImage: imageData?.data?.display_url
+                }
+                fetch(`${process.env.REACT_APP_API_URL}/categories/${user?.email}`, {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                        authorization: `bearer ${localStorage.getItem('accessToken')}`
+                    },
+                    body: JSON.stringify(category)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        setLoading(false);
+                    })
+                    .catch(error => {
+                        setLoading(false);
+                        console.log(error)
+                    })
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                setLoading(false);
+                console.log(error)
+            })
     }
 
     return (
