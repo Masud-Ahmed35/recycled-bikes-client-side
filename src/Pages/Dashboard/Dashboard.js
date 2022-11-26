@@ -19,7 +19,7 @@ const Dashboard = () => {
                 setLoading(false);
             })
 
-    }, [user])
+    }, [user, setLoading])
 
     return (
         <div>
