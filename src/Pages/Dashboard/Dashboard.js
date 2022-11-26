@@ -42,13 +42,13 @@ const Dashboard = () => {
                                                 <Link to='/dashboard/add-category'>
                                                     <button className="btn btn-outline text-base font-bold normal-case w-[90%] mx-auto">Add a Category</button>
                                                 </Link>
-                                                <Link>
+                                                <Link to='/dashboard/all-seller'>
                                                     <button className="btn btn-outline text-base mt-5 font-bold normal-case w-[90%] mx-auto">All Seller</button>
                                                 </Link>
-                                                <Link>
+                                                <Link to='/dashboard/all-buyer'>
                                                     <button className="btn btn-outline text-base my-5 font-bold normal-case w-[90%] mx-auto">All Buyer</button>
                                                 </Link>
-                                                <Link>
+                                                <Link to='/dashboard/reported-items'>
                                                     <button className="btn btn-outline text-base font-bold normal-case w-[90%] mx-auto">Reported Items</button>
                                                 </Link>
                                             </div>

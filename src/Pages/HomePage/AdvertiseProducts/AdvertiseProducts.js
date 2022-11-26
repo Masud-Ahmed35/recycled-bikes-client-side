@@ -13,8 +13,6 @@ const AdvertiseProducts = () => {
         }
     })
 
-    console.log(products);
-
     return (
         <div className='mt-11'>
             <h1 className='text-center text-4xl font-bold'>Advertisement Area</h1>
