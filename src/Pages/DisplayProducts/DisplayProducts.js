@@ -1,9 +1,21 @@
-import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider';
 import ProductCard from './ProductCard';
 
 const DisplayProducts = () => {
     const products = useLoaderData();
+    const { user } = useContext(AuthContext);
+
+    const { data: sellerInfo = {} } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/users/${user?.email}`)
+            const data = await res.json()
+            return data;
+        }
+    })
 
     return (
         <div className='mt-7'>
@@ -16,6 +28,7 @@ const DisplayProducts = () => {
                                 products?.map(product => <ProductCard
                                     key={product._id}
                                     product={product}
+                                    sellerInfo={sellerInfo}
                                 ></ProductCard>)
                             }
                         </div>

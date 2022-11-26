@@ -45,7 +45,6 @@ const AddProduct = () => {
                     sellerPhone: data?.sellerPhone,
                     yearsOfUse: data?.yearsOfUse,
                     availability: 'Available',
-                    sellerVerification: 'Verified',
                     postTime: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`
 
                 }
