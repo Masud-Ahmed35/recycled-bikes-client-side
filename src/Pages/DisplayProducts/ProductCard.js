@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaCheckCircle } from "react-icons/fa";
+import { FaCheckCircle, FaMapMarkerAlt } from "react-icons/fa";
 
 const ProductCard = ({ product }) => {
     const {
@@ -39,8 +39,29 @@ const ProductCard = ({ product }) => {
             </div>
             <div>
                 <img src={productImage} alt="" className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500" />
-                <h2 className="mb-1 text-xl font-semibold">{productName}</h2>
-                <p className="text-sm dark:text-gray-400">{description}</p>
+                <h2 className="mb-1 text-xl font-extrabold italic font-mono">{productName}</h2>
+                <div className='flex justify-between my-3 text-sm font-medium'>
+                    <p>OriginalPrice: <span className='text-red-600 font-extrabold text-base'>${originalPrice}</span></p>
+                    <p>ResalePrice: <span className='text-green-600 font-extrabold text-base'>${resalePrice}</span></p>
+                </div>
+                <div className='flex justify-between mb-3 text-base font-medium'>
+                    <p>PurchaseYear: <span className=''>{purchaseYear}</span></p>
+                    <p>Years of Use: <span className=''>{yearsOfUse}</span></p>
+                </div>
+                <div className='flex justify-between mb-3 text-base font-medium'>
+                    <p>Condition: <span className=''>{condition}</span></p>
+                    <p>Color: <span className=''>{color}</span></p>
+                </div>
+                <p className="text-sm">{description}</p>
+                <div className='mt-5 grid grid-cols-2'>
+                    <p className='flex items-center gap-2'>
+                        <span className='text-gray-500'><FaMapMarkerAlt /></span>
+                        <span>{location}</span>
+                    </p>
+                    <div className=''>
+                        <button className="btn btn-outline w-full btn-success">Book Now</button>
+                    </div>
+                </div>
             </div>
         </div>
     );
