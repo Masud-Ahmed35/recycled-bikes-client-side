@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider';
 
@@ -99,9 +100,14 @@ const SellerProducts = () => {
                                             </td>
                                             <td>{product?.resalePrice}</td>
                                             <td>{product?.availability}</td>
-                                            <td><button
-                                                onClick={() => handleAdvertise(product)}
-                                                className='btn btn-xs normal-case btn-outline btn-info'>Advertise</button></td>
+                                            <td>
+                                                <Link to='/'>
+                                                    <button
+                                                        onClick={() => handleAdvertise(product)}
+                                                        className='btn btn-xs normal-case btn-outline btn-info'>Advertise
+                                                    </button>
+                                                </Link>
+                                            </td>
                                             <td><button
                                                 onClick={() => handleDeleteProduct(product?._id)}
                                                 className='btn btn-xs btn-error'>Delete</button></td>
