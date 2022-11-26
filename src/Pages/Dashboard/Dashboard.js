@@ -23,7 +23,8 @@ const Dashboard = () => {
 
     return (
         <div>
-            <div className="flex flex-col w-64 py-8 bg-white border-r dark:bg-gray-900 dark:border-gray-700">
+            <div className="flex flex-col w-64 py-8 border-r">
+                <p className='text-center uppercase text-sm font-bold italic font-serif'>{`${role} Dashboard`}</p>
                 <div className="flex flex-col items-center mt-6 -mx-2">
                     <img className="object-cover w-24 h-24 mx-2 rounded-full" src={user?.photoURL} alt="avatar" />
                     <h4 className="mx-2 mt-2 font-medium text-gray-800 hover:underline">{user?.displayName}</h4>
@@ -56,7 +57,7 @@ const Dashboard = () => {
                                                 <Link to='/dashboard/add-product'>
                                                     <button className="btn btn-outline text-base font-bold normal-case w-[90%] mx-auto">Add a Product</button>
                                                 </Link>
-                                                <Link>
+                                                <Link to='/dashboard/seller-products'>
                                                     <button className="btn btn-outline text-base my-5 font-bold normal-case w-[90%] mx-auto">My Products</button>
                                                 </Link>
                                                 <Link>
@@ -74,9 +75,6 @@ const Dashboard = () => {
                         }
                     </nav>
                 </div>
-            </div>
-            <div>
-
             </div>
         </div>
     );

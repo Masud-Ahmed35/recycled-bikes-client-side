@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaCheckCircle, FaMapMarkerAlt } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
     const {
@@ -58,8 +59,10 @@ const ProductCard = ({ product }) => {
                         <span className='text-gray-500'><FaMapMarkerAlt /></span>
                         <span>{location}</span>
                     </p>
-                    <div className=''>
-                        <button className="btn btn-outline w-full btn-success">Book Now</button>
+                    <div>
+                        <Link>
+                            <button className="btn btn-outline w-full btn-success">Book Now</button>
+                        </Link>
                     </div>
                 </div>
             </div>
