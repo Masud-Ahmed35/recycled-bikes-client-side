@@ -48,8 +48,8 @@ const Dashboard = () => {
                                                 <Link to='/dashboard/all-buyer'>
                                                     <button className="btn btn-outline text-base my-5 font-bold normal-case w-[90%] mx-auto">All Buyer</button>
                                                 </Link>
-                                                <Link to='/dashboard/reported-items'>
-                                                    <button className="btn btn-outline text-base font-bold normal-case w-[90%] mx-auto">Reported Items</button>
+                                                <Link to='/dashboard/reported-products'>
+                                                    <button className="btn btn-outline text-base font-bold normal-case w-[90%] mx-auto">Reported Products</button>
                                                 </Link>
                                             </div>
                                             :
