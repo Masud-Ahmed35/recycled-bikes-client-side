@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider';
 
@@ -224,11 +225,13 @@ const AddProduct = () => {
                         <div className="mt-1 text-right">{errors?.description && <p className='text-red-600 text-sm'>{errors?.description?.message}</p>}</div>
                     </div>
                     <div className="flex justify-end mt-6">
-                        <button className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-                            {
-                                loading ? 'Loading...' : 'Add Product'
-                            }
-                        </button>
+                        <Link to='/dashboard/seller-products'>
+                            <button className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
+                                {
+                                    loading ? 'Loading...' : 'Add Product'
+                                }
+                            </button>
+                        </Link>
                     </div>
                 </form>
             </section>

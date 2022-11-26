@@ -2,7 +2,7 @@ import React from 'react';
 import { FaCheckCircle, FaMapMarkerAlt } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
-const ProductCard = ({ product, sellerInfo }) => {
+const ProductCard = ({ product, sellerInfo, handleReport }) => {
     const {
         availability,
         color,
@@ -53,7 +53,7 @@ const ProductCard = ({ product, sellerInfo }) => {
                     <p>Color: <span className=''>{color}</span></p>
                 </div>
                 <p className="text-sm">{description}</p>
-                <div className='mt-5 grid grid-cols-2'>
+                <div className='mt-5 gap-5 grid grid-cols-2'>
                     <p className='flex items-center gap-2'>
                         <span className='text-gray-500'><FaMapMarkerAlt /></span>
                         <span>{location}</span>
@@ -62,6 +62,15 @@ const ProductCard = ({ product, sellerInfo }) => {
                         <Link>
                             <button className="btn btn-outline w-full btn-success">Book Now</button>
                         </Link>
+                    </div>
+                </div>
+                <div className='mt-5 gap-5 grid grid-cols-2'>
+                    <div>
+                        <button className="btn btn-outline btn-sm normal-case w-full btn-info">Add to Wishlist</button>
+                    </div>
+                    <div>
+                        <button onClick={() => handleReport(product)}
+                            className="btn btn-outline btn-sm w-full btn-error normal-case">Report to Admin</button>
                     </div>
                 </div>
             </div>

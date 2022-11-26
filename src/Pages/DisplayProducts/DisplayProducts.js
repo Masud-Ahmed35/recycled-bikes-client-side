@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../Context/AuthProvider';
 import ProductCard from './ProductCard';
 
@@ -17,6 +18,27 @@ const DisplayProducts = () => {
         }
     })
 
+    const handleReport = product => {
+        const confirmation = window.confirm('Are you sure, You want to report to admin?');
+
+        const data = {
+            report: 'reported'
+        }
+        if (confirmation) {
+            fetch(`${process.env.REACT_APP_API_URL}/products/${product?._id}`, {
+                method: 'PATCH',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    toast.success('Successfully Reported to Admin');
+                })
+        }
+    }
+
     return (
         <div className='mt-7'>
             <h1 className='text-center font-extrabold text-3xl italic mb-11'>Choose Your Dream Bike</h1>
@@ -29,6 +51,7 @@ const DisplayProducts = () => {
                                     key={product._id}
                                     product={product}
                                     sellerInfo={sellerInfo}
+                                    handleReport={handleReport}
                                 ></ProductCard>)
                             }
                         </div>
