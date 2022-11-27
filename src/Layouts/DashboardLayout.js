@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Dashboard from '../Pages/Dashboard/Dashboard';
+import Footer from '../Pages/Shared/Footer/Footer';
 import NavBar from '../Pages/Shared/NavBar/NavBar';
 
 const DashboardLayout = () => {
@@ -11,6 +12,7 @@ const DashboardLayout = () => {
                 <Dashboard />
                 <Outlet />
             </div>
+            <Footer></Footer>
         </div>
     );
 };
