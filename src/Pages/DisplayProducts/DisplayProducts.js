@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../Context/AuthProvider';
 import OrdersModal from '../Dashboard/Buyer/OrdersModal';

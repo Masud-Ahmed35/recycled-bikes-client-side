@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { toast } from 'react-toastify';
+import { FaCheckCircle } from "react-icons/fa";
 
 const AllSeller = () => {
     const { data: sellers = [], refetch } = useQuery({
@@ -58,6 +59,7 @@ const AllSeller = () => {
                             <th></th>
                             <th>Image</th>
                             <th>Name</th>
+                            <th>Email</th>
                             <th>Identification</th>
                             <th>Action</th>
                         </tr>
@@ -74,8 +76,9 @@ const AllSeller = () => {
                                     </div>
                                 </td>
                                 <td><p>{seller?.name}</p></td>
+                                <td><p>{seller?.email}</p></td>
                                 <td><p>
-                                    {seller?.verification ? <button className='btn btn-xs btn-primary btn-disabled text-green-600'>Verified</button>
+                                    {seller?.verification ? <FaCheckCircle className='text-blue-600' />
                                         :
                                         <button
                                             onClick={() => handleVerification(seller)}

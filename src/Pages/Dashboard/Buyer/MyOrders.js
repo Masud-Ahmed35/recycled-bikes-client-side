@@ -1,16 +1,25 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const MyOrders = () => {
     const { user, loading, setLoading } = useContext(AuthContext);
 
-
     const { data: orders = [], refetch, isLoading } = useQuery({
         queryKey: ['orders'],
         queryFn: async () => {
             const res = await fetch(`${process.env.REACT_APP_API_URL}/orders/${user?.email}`)
+            const data = await res.json();
+            return data;
+        }
+    })
+
+    const { data: product } = useQuery({
+        queryKey: ['products'],
+        queryFn: async () => {
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/products/${orders?.bookingId}`)
             const data = await res.json();
             return data;
         }
@@ -82,10 +91,17 @@ const MyOrders = () => {
                                                         <td>{order?.resalePrice}</td>
                                                         <td>{order?.availability}</td>
                                                         <td>
-                                                            <button
-                                                                onClick={() => handlePayment(order)}
-                                                                className='btn btn-xs normal-case btn-outline btn-info'>Pay Now
-                                                            </button>
+                                                            <Link to={`/dashboard/stripe-payment/${order?._id}`}>
+                                                                <button
+                                                                    onClick={() => handlePayment(order)}
+                                                                    className={`btn btn-xs normal-case btn-outline btn-info ${product?.availability === 'sold' && 'btn-disabled'}`}>
+                                                                    {
+                                                                        order?.availability === 'sold' ? 'Paid'
+                                                                            :
+                                                                            'Pay Now'
+                                                                    }
+                                                                </button>
+                                                            </Link>
                                                         </td>
                                                         <td><button
                                                             onClick={() => handleCancelOrder(order)}

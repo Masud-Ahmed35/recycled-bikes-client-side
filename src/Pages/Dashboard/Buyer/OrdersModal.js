@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const OrdersModal = ({ handleOrder, setHandleOrder }) => {
-    const { user, loading, setLoading } = useContext(AuthContext);
+    const { user, setLoading } = useContext(AuthContext);
 
     const handleBooking = e => {
         e.preventDefault();

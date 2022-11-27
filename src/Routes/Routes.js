@@ -7,8 +7,8 @@ import AllBuyer from "../Pages/Dashboard/Admin/AllBuyer";
 import AllSeller from "../Pages/Dashboard/Admin/AllSeller";
 import ReportedProducts from "../Pages/Dashboard/Admin/ReportedProducts";
 import MyOrders from "../Pages/Dashboard/Buyer/MyOrders";
+import StripePayment from "../Pages/Dashboard/Buyer/StripePayment";
 import Wishlist from "../Pages/Dashboard/Buyer/Wishlist";
-import Dashboard from "../Pages/Dashboard/Dashboard";
 import AddProduct from "../Pages/Dashboard/Seller/AddProduct";
 import SellerProducts from "../Pages/Dashboard/Seller/SellerProducts";
 import DisplayProducts from "../Pages/DisplayProducts/DisplayProducts";
@@ -90,6 +90,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/wishlist',
                 element: <Wishlist />
+            },
+            {
+                path: '/dashboard/stripe-payment/:id',
+                element: <StripePayment />
             },
 
         ]
