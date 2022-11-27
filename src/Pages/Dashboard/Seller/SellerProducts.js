@@ -29,7 +29,6 @@ const SellerProducts = () => {
         if (confirmation) {
             setLoading(true)
             delete product._id
-            // product.advertisement = 'done';
             fetch(`${process.env.REACT_APP_API_URL}/advertise`, {
                 method: 'POST',
                 headers: {
@@ -39,7 +38,6 @@ const SellerProducts = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    // setRefresh(!refresh);
                     toast.success('Advertisement Successfully Done');
                     setLoading(false);
                 })
@@ -104,12 +102,17 @@ const SellerProducts = () => {
                                                         <td>{product?.resalePrice}</td>
                                                         <td>{product?.availability}</td>
                                                         <td>
-                                                            <Link to='/'>
-                                                                <button
-                                                                    onClick={() => handleAdvertise(product)}
-                                                                    className='btn btn-xs normal-case btn-outline btn-info'>Advertise
-                                                                </button>
-                                                            </Link>
+                                                            {
+                                                                product.availability === 'sold' ?
+                                                                    <p className='text-sm font-bold'>Already Sold</p>
+                                                                    :
+                                                                    <Link to='/'>
+                                                                        <button
+                                                                            onClick={() => handleAdvertise(product)}
+                                                                            className='btn btn-xs normal-case btn-outline btn-info'>Advertise
+                                                                        </button>
+                                                                    </Link>
+                                                            }
                                                         </td>
                                                         <td><button
                                                             onClick={() => handleDeleteProduct(product)}
