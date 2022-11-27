@@ -93,7 +93,8 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/stripe-payment/:id',
-                element: <StripePayment />
+                element: <StripePayment />,
+                loader: ({ params }) => fetch(`${process.env.REACT_APP_API_URL}/paymentOrders/${params.id}`)
             },
 
         ]
