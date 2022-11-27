@@ -18,19 +18,6 @@ const MyOrders = () => {
         }
     })
 
-    // const { data: product } = useQuery({
-    //     queryKey: ['paymentProducts'],
-    //     queryFn: async () => {
-    //         const res = await fetch(`${process.env.REACT_APP_API_URL}/paymentProducts/${soldProduct?.bookingId}`)
-    //         const data = await res.json();
-    //         return data;
-    //     }
-    // })
-
-    const handlePayment = order => {
-
-    }
-
     const handleCancelOrder = order => {
         const confirmation = window.confirm('Are you sure, You want to Cancel this product?');
         if (confirmation) {
@@ -87,17 +74,17 @@ const MyOrders = () => {
                                             <td>{order?.resalePrice}</td>
                                             <td>{order?.availability}</td>
                                             <td>
-                                                <Link to={`/dashboard/stripe-payment/${order?._id}`}>
-                                                    <button
-                                                        onClick={() => handlePayment(order)}
-                                                        className={`btn btn-xs normal-case btn-outline btn-info ${order?.availability === 'sold' && 'btn-disabled'}`}>
-                                                        {
-                                                            order?.availability === 'sold' ? 'Paid'
-                                                                :
-                                                                'Pay Now'
-                                                        }
-                                                    </button>
-                                                </Link>
+                                                {
+                                                    order?.availability === 'sold' ?
+                                                        <p className='font-medium text-green-500'>PAID</p>
+                                                        :
+                                                        <Link to={`/dashboard/stripe-payment/${order?._id}`}>
+                                                            <button
+                                                                className={`btn btn-xs normal-case btn-outline btn-info`}>
+                                                                Pay Now
+                                                            </button>
+                                                        </Link>
+                                                }
                                             </td>
                                             <td><button
                                                 onClick={() => handleCancelOrder(order)}

@@ -59,19 +59,16 @@ const ProductCard = ({ product, handleReport, setHandleOrder, loading }) => {
                         <span>{location}</span>
                     </p>
                     <div>
-                        {/* <button onClick={() => handleOrder(product)}
-                            className="btn btn-outline w-full btn-success">
-                            {
-                                loading ? 'Loading...'
-                                    :
-                                    'Book Now'
-                            }
-                        </button> */}
-                        <label
-                            onClick={() => setHandleOrder(product)}
-                            htmlFor="ordersModal"
-                            className="btn btn-outline w-full btn-success"
-                        >{loading ? 'Loading...' : 'Book Now'}</label>
+                        {
+                            availability === 'sold' ?
+                                <p className='text-center font-bold border-2 py-3 rounded-full'>Sold Out</p>
+                                :
+                                <label
+                                    onClick={() => setHandleOrder(product)}
+                                    htmlFor="ordersModal"
+                                    className="btn btn-outline w-full btn-success"
+                                >{loading ? 'Loading...' : 'Book Now'}</label>
+                        }
                     </div>
 
                 </div>
