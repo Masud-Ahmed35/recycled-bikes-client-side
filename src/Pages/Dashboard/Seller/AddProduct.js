@@ -1,19 +1,29 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const AddProduct = () => {
     const { user, loading, setLoading } = useContext(AuthContext);
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const navigate = useNavigate();
     const date = new Date();
 
     const { data: categories = [] } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
             const res = await fetch(`${process.env.REACT_APP_API_URL}/categories`)
+            const data = await res.json()
+            return data;
+        }
+    })
+
+    const { data: sellerInfo = {} } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/users/${user?.email}`)
             const data = await res.json()
             return data;
         }
@@ -46,6 +56,7 @@ const AddProduct = () => {
                     sellerPhone: data?.sellerPhone,
                     yearsOfUse: data?.yearsOfUse,
                     availability: 'Available',
+                    sellerVerification: sellerInfo?.verification,
                     postTime: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`
 
                 }
@@ -60,6 +71,7 @@ const AddProduct = () => {
                     .then(res => res.json())
                     .then(data => {
                         toast.success('Product Added Successfully');
+                        navigate('/dashboard/seller-products')
                         console.log(data);
                         setLoading(false);
                     })
@@ -225,13 +237,20 @@ const AddProduct = () => {
                         <div className="mt-1 text-right">{errors?.description && <p className='text-red-600 text-sm'>{errors?.description?.message}</p>}</div>
                     </div>
                     <div className="flex justify-end mt-6">
-                        <Link to='/dashboard/seller-products'>
-                            <button className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-                                {
-                                    loading ? 'Loading...' : 'Add Product'
-                                }
-                            </button>
-                        </Link>
+                        {
+                            loading ?
+                                <input
+                                    type="submit"
+                                    value='Loading....'
+                                    className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+                                />
+                                :
+                                <input
+                                    type="submit"
+                                    value="Add product"
+                                    className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+                                />
+                        }
                     </div>
                 </form>
             </section>

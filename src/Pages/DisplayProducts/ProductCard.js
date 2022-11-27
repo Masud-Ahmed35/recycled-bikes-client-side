@@ -2,7 +2,7 @@ import React from 'react';
 import { FaCheckCircle, FaMapMarkerAlt } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
-const ProductCard = ({ product, sellerInfo, handleReport }) => {
+const ProductCard = ({ product, handleReport }) => {
     const {
         availability,
         color,
@@ -18,7 +18,8 @@ const ProductCard = ({ product, sellerInfo, handleReport }) => {
         sellerEmail,
         sellerName,
         sellerPhone,
-        yearsOfUse
+        yearsOfUse,
+        sellerVerification
     } = product;
 
     return (
@@ -27,7 +28,7 @@ const ProductCard = ({ product, sellerInfo, handleReport }) => {
                 <div className="flex flex-col space-y-1">
                     <p className='flex text-sm'>Seller:
                         <span className='font-medium ml-1'>{sellerName}</span>
-                        <span className='ml-1 mt-1'>{sellerInfo?.verification && <FaCheckCircle className='text-blue-600' />}</span>
+                        <span className='ml-1 mt-1'>{sellerVerification && <FaCheckCircle className='text-blue-600' />}</span>
                     </p>
                     <span className="text-xs">Email: {sellerEmail}</span>
                     <span className="text-xs">Phone: {sellerPhone}</span>
