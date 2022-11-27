@@ -1,8 +1,7 @@
 import React from 'react';
 import { FaCheckCircle, FaMapMarkerAlt } from "react-icons/fa";
-import { Link } from 'react-router-dom';
 
-const ProductCard = ({ product, handleReport, handleOrder, loading }) => {
+const ProductCard = ({ product, handleReport, setHandleOrder, loading }) => {
     const {
         availability,
         color,
@@ -60,17 +59,21 @@ const ProductCard = ({ product, handleReport, handleOrder, loading }) => {
                         <span>{location}</span>
                     </p>
                     <div>
-                        <Link>
-                            <button onClick={() => handleOrder(product)}
-                                className="btn btn-outline w-full btn-success">
-                                {
-                                    loading ? 'Loading...'
-                                        :
-                                        'Book Now'
-                                }
-                            </button>
-                        </Link>
+                        {/* <button onClick={() => handleOrder(product)}
+                            className="btn btn-outline w-full btn-success">
+                            {
+                                loading ? 'Loading...'
+                                    :
+                                    'Book Now'
+                            }
+                        </button> */}
+                        <label
+                            onClick={() => setHandleOrder(product)}
+                            htmlFor="ordersModal"
+                            className="btn btn-outline w-full btn-success"
+                        >{loading ? 'Loading...' : 'Book Now'}</label>
                     </div>
+
                 </div>
                 <div className='mt-5 gap-5 grid grid-cols-2'>
                     <div>

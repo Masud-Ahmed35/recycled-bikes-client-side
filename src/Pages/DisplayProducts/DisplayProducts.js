@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../Context/AuthProvider';
+import OrdersModal from '../Dashboard/Buyer/OrdersModal';
 import ProductCard from './ProductCard';
 
 const DisplayProducts = () => {
     const products = useLoaderData();
-    const { user, loading, setLoading } = useContext(AuthContext);
-    const navigate = useNavigate();
+    const { loading, setLoading } = useContext(AuthContext);
+    const [handleOrder, setHandleOrder] = useState(null);
 
 
     const handleReport = product => {
@@ -36,34 +37,6 @@ const DisplayProducts = () => {
         }
     }
 
-    const handleOrder = product => {
-        const confirmation = window.confirm('Are you sure, You want to Book this product?');
-
-        const order = { ...product, bookingId: product?._id, buyerName: user?.displayName, buyerEmail: user?.email }
-        delete order?._id
-
-        if (confirmation) {
-            setLoading(true)
-            fetch(`${process.env.REACT_APP_API_URL}/orders`, {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(order)
-            })
-                .then(res => res.json())
-                .then(data => {
-                    toast.success('Successfully Booked Product');
-                    navigate('/dashboard/my-orders')
-                    setLoading(false)
-                })
-                .catch(error => {
-                    console.log(error);
-                    setLoading(false)
-                })
-        }
-    }
-
     return (
         <div className='mt-7'>
             <h1 className='text-center font-extrabold text-3xl italic mb-11'>Choose Your Dream Bike</h1>
@@ -76,7 +49,7 @@ const DisplayProducts = () => {
                                     key={product._id}
                                     product={product}
                                     handleReport={handleReport}
-                                    handleOrder={handleOrder}
+                                    setHandleOrder={setHandleOrder}
                                     loading={loading}
                                 ></ProductCard>)
                             }
@@ -87,6 +60,13 @@ const DisplayProducts = () => {
                         </div>
                 }
             </div>
+            {
+                handleOrder && <OrdersModal
+                    handleOrder={handleOrder}
+                    setHandleOrder={setHandleOrder}
+                ></OrdersModal>
+            }
+
         </div>
     );
 };
