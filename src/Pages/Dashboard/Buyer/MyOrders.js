@@ -1,11 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const MyOrders = () => {
     const { user, loading, setLoading } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [soldProduct, setSoldProduct] = useState({});
 
     const { data: orders = [], refetch, isLoading } = useQuery({
         queryKey: ['orders'],
@@ -16,14 +18,14 @@ const MyOrders = () => {
         }
     })
 
-    const { data: product } = useQuery({
-        queryKey: ['products'],
-        queryFn: async () => {
-            const res = await fetch(`${process.env.REACT_APP_API_URL}/products/${orders?.bookingId}`)
-            const data = await res.json();
-            return data;
-        }
-    })
+    // const { data: product } = useQuery({
+    //     queryKey: ['paymentProducts'],
+    //     queryFn: async () => {
+    //         const res = await fetch(`${process.env.REACT_APP_API_URL}/paymentProducts/${soldProduct?.bookingId}`)
+    //         const data = await res.json();
+    //         return data;
+    //     }
+    // })
 
     const handlePayment = order => {
 
@@ -64,7 +66,7 @@ const MyOrders = () => {
                                         <th>Name</th>
                                         <th>Price</th>
                                         <th>Status</th>
-                                        <th>Advertisement</th>
+                                        <th>Payment</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -88,7 +90,7 @@ const MyOrders = () => {
                                                 <Link to={`/dashboard/stripe-payment/${order?._id}`}>
                                                     <button
                                                         onClick={() => handlePayment(order)}
-                                                        className={`btn btn-xs normal-case btn-outline btn-info ${product?.availability === 'sold' && 'btn-disabled'}`}>
+                                                        className={`btn btn-xs normal-case btn-outline btn-info ${order?.availability === 'sold' && 'btn-disabled'}`}>
                                                         {
                                                             order?.availability === 'sold' ? 'Paid'
                                                                 :

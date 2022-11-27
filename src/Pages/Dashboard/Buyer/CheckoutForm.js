@@ -76,7 +76,8 @@ const CheckoutForm = ({ order }) => {
                 price: order?.resalePrice,
                 transactionId: paymentIntent.id,
                 email: order?.buyerEmail,
-                bookingId: order?.bookingId
+                bookingId: order?.bookingId,
+                ordersId: order?._id
             }
 
             fetch(`${process.env.REACT_APP_API_URL}/payments`, {
@@ -93,8 +94,7 @@ const CheckoutForm = ({ order }) => {
                         setSuccess('Congrats!!! Your payment successful');
                         setTransactionId(paymentIntent.id);
                         setLoading(false);
-
-                        // Patch operation for sold status.........
+                        toast.success('Congrats!!! Your payment successful');
                     }
                 })
                 .catch(error => {
