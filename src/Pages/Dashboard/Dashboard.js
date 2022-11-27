@@ -68,8 +68,11 @@ const Dashboard = () => {
                                 </div>
                                 :
                                 <div className='mt-5'>
-                                    <Link>
+                                    <Link to='/dashboard/my-orders'>
                                         <button className="btn btn-outline text-base font-bold normal-case w-[90%] mx-auto">My Orders</button>
+                                    </Link>
+                                    <Link to='/dashboard/wishlist'>
+                                        <button className="btn btn-outline mt-5 text-base font-bold normal-case w-[90%] mx-auto">Wishlist</button>
                                     </Link>
                                 </div>
                         }

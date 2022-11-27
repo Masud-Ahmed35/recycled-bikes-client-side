@@ -1,19 +1,22 @@
-import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { AuthContext } from '../../Context/AuthProvider';
 import ProductCard from './ProductCard';
 
 const DisplayProducts = () => {
     const products = useLoaderData();
+    const { user, loading, setLoading } = useContext(AuthContext);
+    const navigate = useNavigate();
 
 
     const handleReport = product => {
         const confirmation = window.confirm('Are you sure, You want to report to admin?');
-
         const data = {
             report: 'reported'
         }
         if (confirmation) {
+            setLoading(true)
             fetch(`${process.env.REACT_APP_API_URL}/products/${product?._id}`, {
                 method: 'PATCH',
                 headers: {
@@ -24,6 +27,39 @@ const DisplayProducts = () => {
                 .then(res => res.json())
                 .then(data => {
                     toast.success('Successfully Reported to Admin');
+                    setLoading(false)
+                })
+                .catch(error => {
+                    console.log(error);
+                    setLoading(false)
+                })
+        }
+    }
+
+    const handleOrder = product => {
+        const confirmation = window.confirm('Are you sure, You want to Book this product?');
+
+        const order = { ...product, bookingId: product?._id, buyerName: user?.displayName, buyerEmail: user?.email }
+        delete order?._id
+
+        if (confirmation) {
+            setLoading(true)
+            fetch(`${process.env.REACT_APP_API_URL}/orders`, {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(order)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    toast.success('Successfully Booked Product');
+                    navigate('/dashboard/my-orders')
+                    setLoading(false)
+                })
+                .catch(error => {
+                    console.log(error);
+                    setLoading(false)
                 })
         }
     }
@@ -40,6 +76,8 @@ const DisplayProducts = () => {
                                     key={product._id}
                                     product={product}
                                     handleReport={handleReport}
+                                    handleOrder={handleOrder}
+                                    loading={loading}
                                 ></ProductCard>)
                             }
                         </div>
