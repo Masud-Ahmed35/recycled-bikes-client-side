@@ -28,13 +28,14 @@ const SellerProducts = () => {
 
         if (confirmation) {
             setLoading(true)
-            delete product._id
+            const advertisedProduct = { ...product, advertiseId: product?._id }
+            delete advertisedProduct._id
             fetch(`${process.env.REACT_APP_API_URL}/advertise`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
                 },
-                body: JSON.stringify(product)
+                body: JSON.stringify(advertisedProduct)
             })
                 .then(res => res.json())
                 .then(data => {

@@ -11,7 +11,6 @@ const CheckoutForm = ({ order }) => {
     const [success, setSuccess] = useState('');
     const [transactionId, setTransactionId] = useState('');
 
-
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/create-payment-intent`, {
             method: "POST",
@@ -105,6 +104,7 @@ const CheckoutForm = ({ order }) => {
         setLoading(false);
 
     }
+
     return (
         <>
             <form onSubmit={handleSubmit}>
