@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider';
 
 
-const SellerRoute = ({ children }) => {
+const BuyerRoute = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
     const [role, setRole] = useState(null);
     const [roleLoading, setRoleLoading] = useState(true);
@@ -24,11 +24,11 @@ const SellerRoute = ({ children }) => {
     if (loading || roleLoading) {
         return <h1>Loading.....</h1>
     }
-    if (user && user?.uid && role === 'seller') {
+    if (user && user?.uid && role === 'buyer') {
         return children;
     }
     return <Navigate to='/login' />
 
 };
 
-export default SellerRoute;
+export default BuyerRoute;

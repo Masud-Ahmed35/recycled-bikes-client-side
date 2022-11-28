@@ -17,6 +17,9 @@ import Home from "../Pages/HomePage/Home";
 import Login from "../Pages/LoginPage/Login";
 import SignUp from "../Pages/LoginPage/SignUp";
 import Products from "../Pages/ProductsPage/Products";
+import AdminRoute from "./AdminRoute";
+import BuyerRoute from "./BuyerRoute";
+import SellerRoute from "./SellerRoute";
 
 const router = createBrowserRouter([
     {
@@ -50,7 +53,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/category/:id',
-                element: <DisplayProducts />,
+                element: <BuyerRoute><DisplayProducts /></BuyerRoute>,
                 loader: ({ params }) => fetch(`${process.env.REACT_APP_API_URL}/products/${params.id}`)
             },
         ]
@@ -61,31 +64,31 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard/add-category',
-                element: <AddCategory />
+                element: <AdminRoute><AddCategory /></AdminRoute>
             },
             {
                 path: '/dashboard/all-buyer',
-                element: <AllBuyer />
+                element: <AdminRoute><AllBuyer /></AdminRoute>
             },
             {
                 path: '/dashboard/all-seller',
-                element: <AllSeller />
+                element: <AdminRoute><AllSeller /></AdminRoute>
             },
             {
                 path: '/dashboard/reported-products',
-                element: <ReportedProducts />
+                element: <AdminRoute><ReportedProducts /></AdminRoute>
             },
             {
                 path: '/dashboard/add-product',
-                element: <AddProduct />
+                element: <SellerRoute><AddProduct /></SellerRoute>
             },
             {
                 path: '/dashboard/seller-products',
-                element: <SellerProducts />
+                element: <SellerRoute><SellerProducts /></SellerRoute>
             },
             {
                 path: '/dashboard/my-orders',
-                element: <MyOrders />
+                element: <BuyerRoute><MyOrders /></BuyerRoute>
             },
             {
                 path: '/dashboard/wishlist',
@@ -93,7 +96,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/stripe-payment/:id',
-                element: <StripePayment />,
+                element: <BuyerRoute><StripePayment /></BuyerRoute>,
                 loader: ({ params }) => fetch(`${process.env.REACT_APP_API_URL}/paymentOrders/${params.id}`)
             },
 
