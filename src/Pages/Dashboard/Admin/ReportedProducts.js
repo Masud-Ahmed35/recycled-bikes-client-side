@@ -6,7 +6,11 @@ const ReportedProducts = () => {
     const { data: products = [], refetch } = useQuery({
         queryKey: ['reportedProducts'],
         queryFn: async () => {
-            const res = await fetch(`${process.env.REACT_APP_API_URL}/reportedProducts`)
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/reportedProducts`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
             const data = await res.json()
             return data;
         }
@@ -18,6 +22,9 @@ const ReportedProducts = () => {
         if (confirmation) {
             fetch(`${process.env.REACT_APP_API_URL}/products/${product?._id}`, {
                 method: 'DELETE',
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {

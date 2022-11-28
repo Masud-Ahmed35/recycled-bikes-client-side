@@ -24,7 +24,8 @@ const OrdersModal = ({ handleOrder, setHandleOrder }) => {
             fetch(`${process.env.REACT_APP_API_URL}/orders`, {
                 method: 'POST',
                 headers: {
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
                 },
                 body: JSON.stringify(order)
             })

@@ -7,7 +7,11 @@ const AdvertiseProducts = () => {
     const { data: products = [] } = useQuery({
         queryKey: ['advertise'],
         queryFn: async () => {
-            const res = await fetch(`${process.env.REACT_APP_API_URL}/advertise`)
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/advertise`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
             const data = await res.json();
             return data;
         }

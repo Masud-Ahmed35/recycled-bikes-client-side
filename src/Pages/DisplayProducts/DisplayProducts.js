@@ -21,7 +21,8 @@ const DisplayProducts = () => {
             fetch(`${process.env.REACT_APP_API_URL}/products/${product?._id}`, {
                 method: 'PATCH',
                 headers: {
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
                 },
                 body: JSON.stringify(data)
             })

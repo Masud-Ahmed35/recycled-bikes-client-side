@@ -8,7 +8,11 @@ const Dashboard = () => {
 
     useEffect(() => {
         setLoading(true)
-        fetch(`${process.env.REACT_APP_API_URL}/users/${user?.email}`)
+        fetch(`${process.env.REACT_APP_API_URL}/users/${user?.email}`, {
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
             .then(res => res.json())
             .then(data => {
                 setRole(data.role);

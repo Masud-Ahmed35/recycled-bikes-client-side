@@ -1,18 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const MyOrders = () => {
     const { user, loading, setLoading } = useContext(AuthContext);
-    const navigate = useNavigate();
-    const [soldProduct, setSoldProduct] = useState({});
 
     const { data: orders = [], refetch, isLoading } = useQuery({
         queryKey: ['orders'],
         queryFn: async () => {
-            const res = await fetch(`${process.env.REACT_APP_API_URL}/orders/${user?.email}`)
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/orders/${user?.email}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
             const data = await res.json();
             return data;
         }
@@ -24,6 +26,9 @@ const MyOrders = () => {
             setLoading(true)
             fetch(`${process.env.REACT_APP_API_URL}/orders/${order?._id}`, {
                 method: 'DELETE',
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {

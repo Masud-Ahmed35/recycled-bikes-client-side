@@ -9,7 +9,7 @@ const Banner = () => {
                 <div className="hero-content text-center text-neutral-content">
                     <div className="">
                         <h1 className="mb-5 text-5xl font-extrabold italic">Hey Bike Lovers</h1>
-                        <h1 className="mb-5 text-3xl font-bold">Dream it, Believe it & Achieve it.</h1>
+                        <h1 className="mb-5 text-3xl font-bold">Dream, Try, Believe & Achieve it.</h1>
                         <p className="mb-5 lg:w-3/4 lg:mx-auto lg:text-lg">Motorcycles in Bangladesh form an important part of how the population
                             travels daily. With an ever-shrinking road space, two-wheelers are a better option for
                             many to negotiable the many challenges that cities across the country throws at commuters.
