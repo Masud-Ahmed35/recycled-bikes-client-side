@@ -35,9 +35,7 @@ const ClientReviews = () => {
                 <section className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 lg:grid-cols-2 xl:grid-cols-3">
                     <div className="p-8 border rounded-lg dark:border-gray-700">
                         <p className="leading-loose text-gray-500 dark:text-gray-400">
-                            “Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quibusdam ducimus libero ad
-                            tempora doloribus expedita laborum saepe voluptas perferendis delectus assumenda rerum, culpa
-                            aperiam dolorum, obcaecati corrupti aspernatur a.”.
+                            “While we have given lots of examples of complimentary words and compliments, the key is to deliver them in the right way. They need to come across as authentic. A compliment cannot feel like just another box-ticking exercise, which are what soft skills are often reduced down to as part of a contact centre quality programme.”.
                         </p>
 
                         <div className="flex items-center mt-8 -mx-2">
@@ -52,9 +50,7 @@ const ClientReviews = () => {
 
                     <div className="p-8 bg-blue-500 border border-transparent rounded-lg dark:bg-blue-600">
                         <p className="leading-loose text-white">
-                            “Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quibusdam ducimus libero ad
-                            tempora doloribus expedita laborum saepe voluptas perferendis delectus assumenda rerum, culpa
-                            aperiam dolorum, obcaecati corrupti aspernatur a.”.
+                            “While we have given lots of examples of complimentary words and compliments, the key is to deliver them in the right way. They need to come across as authentic. A compliment cannot feel like just another box-ticking exercise, which are what soft skills are often reduced down to as part of a contact centre quality programme.”.
                         </p>
 
                         <div className="flex items-center mt-8 -mx-2">
@@ -69,9 +65,7 @@ const ClientReviews = () => {
 
                     <div className="p-8 border rounded-lg dark:border-gray-700">
                         <p className="leading-loose text-gray-500 dark:text-gray-400">
-                            “Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quibusdam ducimus libero ad
-                            tempora doloribus expedita laborum saepe voluptas perferendis delectus assumenda rerum, culpa
-                            aperiam dolorum, obcaecati corrupti aspernatur a.”.
+                            “While we have given lots of examples of complimentary words and compliments, the key is to deliver them in the right way. They need to come across as authentic. A compliment cannot feel like just another box-ticking exercise, which are what soft skills are often reduced down to as part of a contact centre quality programme.”.
                         </p>
 
                         <div className="flex items-center mt-8 -mx-2">
