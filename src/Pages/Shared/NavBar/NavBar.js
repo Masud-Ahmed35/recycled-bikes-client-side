@@ -22,7 +22,7 @@ const NavBar = () => {
                     <li><Link to='/dashboard'>Dashboard</Link></li>
                     <li className='ml-2'>
                         <Link to='/login'>
-                            <button onClick={handleLogOut} className='btn btn-outline btn-xs rounded-xl normal-case'>Sign Out</button>
+                            <button onClick={handleLogOut} className='btn btn-outline btn-sm btn-error rounded-full normal-case'>Sign Out</button>
                         </Link>
                     </li>
                 </>

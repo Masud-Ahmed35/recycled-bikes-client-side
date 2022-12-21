@@ -8,7 +8,7 @@ const PrivateRoute = ({ children }) => {
     const location = useLocation();
 
     if (loading) {
-        return <Spinner />
+        return <div className='flex justify-center'><Spinner /></div>
     }
 
     if (user && user?.uid) {

@@ -23,7 +23,7 @@ const SellerRoute = ({ children }) => {
     }, [user])
 
     if (loading || roleLoading) {
-        return <Spinner />
+        return <div className='flex justify-center'><Spinner /></div>
     }
     if (user && user?.uid && role === 'seller') {
         return children;
