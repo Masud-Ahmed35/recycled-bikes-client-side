@@ -15,7 +15,7 @@ const Banner = () => {
                             many to negotiable the many challenges that cities across the country throws at commuters.
                             And it has always been a much more affordable option for the masses.
                         </p>
-                        <button className="btn btn-primary">Get Started</button>
+                        <button className="btn bg-gradient-to-r from-teal-600 to-red-500 border-0">Get Started</button>
                     </div>
                 </div>
             </div>

@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Spinner from '../../../Components/Spinner';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const SellerProducts = () => {
-    const { user, loading, setLoading } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const [products, setProducts] = useState([]);
     const [refresh, setRefresh] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         setLoading(true)
@@ -67,11 +69,11 @@ const SellerProducts = () => {
     return (
         <div>
             {
-                products?.length > 0 ?
+                loading ? <div className='flex justify-center'><Spinner /></div>
+                    :
                     <>
                         {
-                            loading ? <p>Loading...........</p>
-                                :
+                            products?.length > 0 ?
                                 <>
                                     <div className="overflow-x-auto">
                                         <table className="table w-full">
@@ -124,11 +126,11 @@ const SellerProducts = () => {
                                         </table>
                                     </div>
                                 </>
+                                :
+                                <>
+                                    <h1 className='text-center font-bold text-3xl mt-7'>There is no product added till now</h1>
+                                </>
                         }
-                    </>
-                    :
-                    <>
-                        <h1 className='text-center font-bold text-3xl mt-7'>There is no product added till now</h1>
                     </>
             }
         </div>

@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { setAuthToken } from '../../Api/auth';
+import SmallSpinner from '../../Components/SmallSpinner';
 import { AuthContext } from '../../Context/AuthProvider';
 
 const Login = () => {
@@ -113,7 +114,7 @@ const Login = () => {
                     <div className="mt-6">
                         <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white uppercase transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                             {
-                                loading ? 'Loading...' : 'LogIn'
+                                loading ? <div className='flex justify-center'><SmallSpinner /></div> : 'LogIn'
                             }
                         </button>
                         <div className="flex items-center justify-between mt-4">
@@ -129,9 +130,7 @@ const Login = () => {
                                 <path d="M36.3425 16.7358H35V16.6667H20V23.3333H29.4192C28.7592 25.1975 27.56 26.805 26.0133 27.9758C26.0142 27.975 26.015 27.975 26.0158 27.9742L31.1742 32.3392C30.8092 32.6708 36.6667 28.3333 36.6667 20C36.6667 18.8825 36.5517 17.7917 36.3425 16.7358Z" fill="#1976D2" />
                             </svg>
                             <span className="mx-2">
-                                {
-                                    loading ? 'Loading...' : 'Sign in with Google'
-                                }
+                                Sign in with Google
                             </span>
                         </Link>
                         <div className="mt-6 text-center ">

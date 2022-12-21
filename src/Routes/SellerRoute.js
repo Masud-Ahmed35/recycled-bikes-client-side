@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import Spinner from '../Components/Spinner';
 import { AuthContext } from '../Context/AuthProvider';
 
 
@@ -22,7 +23,7 @@ const SellerRoute = ({ children }) => {
     }, [user])
 
     if (loading || roleLoading) {
-        return <h1>Loading.....</h1>
+        return <Spinner />
     }
     if (user && user?.uid && role === 'seller') {
         return children;
